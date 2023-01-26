@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFBlazorArgMap", "SFBlazorArgMap\SFBlazorArgMap.csproj", "{B23C041C-F102-4AE7-B851-438F37BBF1AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B23C041C-F102-4AE7-B851-438F37BBF1AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B23C041C-F102-4AE7-B851-438F37BBF1AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B23C041C-F102-4AE7-B851-438F37BBF1AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B23C041C-F102-4AE7-B851-438F37BBF1AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {829B360C-ACD8-476D-9DF0-B4C72E11DB09}
+	EndGlobalSection
+EndGlobal
