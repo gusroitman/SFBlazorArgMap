@@ -6,9 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Program.cs" />
-  </ItemGroup>
+
+
 
   
   <ItemGroup>
@@ -21,6 +20,7 @@
     <Folder Include="Data\" />
   </ItemGroup>
   
+ 
   
 
 </Project>

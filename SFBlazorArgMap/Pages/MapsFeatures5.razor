@@ -1,0 +1,121 @@
+﻿@page "/maps-features5"
+
+@using Syncfusion.Blazor.Maps
+@using Syncfusion.Blazor
+
+@inject NavigationManager NavigationManager
+
+<div class="control-section">
+    <SfMaps Theme="Theme.Bootstrap5" Background="transparent" Height="800px" Width="1200px">
+        <MapsAreaSettings Background="transparent" />
+        <MapsCenterPosition Latitude="-34.192" Longitude="-68.2623" />
+        <MapsZoomSettings Enable="false" ZoomFactor="3" />
+        <MapsAreaSettings Background="#AEE2FA" />
+        <MapsTitleSettings Text="Earthquakes epicenters in Argentina ">
+            <MapsTitleTextStyle Size="18px" FontFamily="Segoe UI" />
+        </MapsTitleSettings>
+        <MapsLayers>
+            <MapsLayer ShapeData='new {dataOptions = "/south-america.json"}' ShapePropertyPath="@ShapePropertyPath" TValue="string">
+                <MapsShapeSettings Fill="#FFFDCF">
+                    <MapsShapeBorder Color="#3497C3" Width="0.5" />
+                </MapsShapeSettings>
+                <MapsLayerTooltipSettings Visible="true" ValuePath="Name" >
+                    <MapsLayerTooltipTextStyle FontFamily="Segoe UI"></MapsLayerTooltipTextStyle>
+                </MapsLayerTooltipSettings>
+                <MapsMarkerSettings>
+                    <MapsMarker Visible="true" Fill="#FF0000" Height="20" Width="20" DataSource="@EarthQuakeIndication" TValue="MarkerDataSource">
+                        <MarkerTemplate>
+                            @{
+                                <div id="template" style="display:block">
+                                    <div class="pulse-container">
+                                        <div class="pulse-box">
+                                            <div class="pulse-css"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </MarkerTemplate>
+                    </MapsMarker>
+                    <MapsMarker Visible="true" Fill="#FF0000" Height="20" Width="20" DataSource="@EarthQuakeIndication2" TValue="MarkerDataSource">
+                        <MarkerTemplate>
+                            @{
+                                    <div id="template" style="display:block">
+                                        <div class="pulse-container">
+                                            <div class="pulse-box">
+                                                <div class="pulse-css"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            }
+                        </MarkerTemplate>
+                    </MapsMarker>
+                </MapsMarkerSettings>
+            </MapsLayer>
+        </MapsLayers>
+    </SfMaps>
+</div>
+<style>
+    .pulse-css {
+        width: 20px;
+        height: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        background: #E94430;
+        position: relative;
+    }
+        .pulse-css:before, .pulse-css:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            background-color: #E94430;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            transform: scale(0.5);
+            transform-origin: center center;
+            animation: pulse-me 3s linear infinite;
+        }
+        .pulse-css:after {
+            animation-delay: 2s;
+        }
+    @@keyframes pulse-me {
+        0% {
+            transform: scale(0.5);
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.3;
+        }
+        70% {
+            opacity: 0.1;
+        }
+        100% {
+            transform: scale(5);
+            opacity: 0;
+        }
+    }
+</style>
+@code {
+
+    public string[] ShapePropertyPath = { "name" };
+    public class MarkerDataSource
+    {
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+
+    };
+    public List<MarkerDataSource> EarthQuakeIndication = new List<MarkerDataSource> {
+        new MarkerDataSource { Latitude=-34.192, Longitude=-68.2623 }
+    };
+    public List<MarkerDataSource> EarthQuakeIndication2 = new List<MarkerDataSource> {
+        new MarkerDataSource { Latitude=-32.192, Longitude=-69.2623 }
+    };
+
+}
