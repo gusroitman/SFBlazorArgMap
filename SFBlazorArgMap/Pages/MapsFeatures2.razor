@@ -1,46 +1,82 @@
 ﻿@page "/maps-features2"
 @using System.Collections.ObjectModel
 @using Syncfusion.Blazor.Maps
-@using Syncfusion.Blazor
-@using static SFBlazorArgMap.Pages.MapsFeatures
-@inject NavigationManager NavigationManager
 
 
-<div class="control-section">
-    <SfMaps Format="N0" UseGroupingSeparator="true" Theme="@Theme" Background="transparent">
-        <MapsAreaSettings Background="transparent" />
-        <MapsTitleSettings Text="State Wise India's Population - 2011">
-            <MapsTitleTextStyle Size="16px" FontFamily="Segoe UI" />
-        </MapsTitleSettings>
-        <MapsLegendSettings Visible="true" Mode="LegendMode.Interactive" Position="LegendPosition.Bottom" Height="10" Width="350" LabelDisplayMode="LabelIntersectAction.Trim" Alignment="Alignment.Center">
-            <MapsLegendTextStyle FontFamily="Segoe UI"></MapsLegendTextStyle>
-        </MapsLegendSettings>
-        <MapsZoomSettings Enable="false" />
-        <MapsLayers>
-            <MapsLayer ShapeData="@MapShapeData" ShapePropertyPath="@ShapePropertyPath" ShapeDataPath="Name" DataSource="@StateWisePopulation" TValue="State">
-                <MapsLayerTooltipSettings Visible="true" ValuePath="Population" Format="State: ${Name} <br> Population: ${Population}">
-                    <MapsLayerTooltipTextStyle FontFamily="Segoe UI"></MapsLayerTooltipTextStyle>
-                </MapsLayerTooltipSettings>
-                <MapsShapeSettings ColorValuePath='@("Population")'>
-                    <MapsShapeBorder Color="white" Width="0.2" />
+<h2>Blazor - Mendoza Maps</h2>
+<br/>
+<div id = "ControlRegion" class="center">
+<SfMaps Height="600px" Width="1000px" Format="N0" UseGroupingSeparator="true" Theme="Theme.Bootstrap5" Background="transparent">
+    <MapsAreaSettings Background="transparent" />
+    <MapsBorder Color="black" Width="1"></MapsBorder>
+    <MapsMargin Bottom="20" Left="20" Right="20" Top="20"></MapsMargin>
+    <MapsLegendSettings Visible="true" Mode="LegendMode.Interactive" Position="LegendPosition.Bottom" Height="10" Width="350" LabelDisplayMode="LabelIntersectAction.Trim" Alignment="Alignment.Center">
+        <MapsLegendTextStyle FontFamily="Segoe UI"></MapsLegendTextStyle>
+    </MapsLegendSettings>
+    <MapsTitleSettings Text="Mendoza Departments" Description="Maps" Alignment="Syncfusion.Blazor.Maps.Alignment.Center">
+        <MapsTitleTextStyle Color="Green" FontFamily="Times New Roman" FontWeight="bold">
+        </MapsTitleTextStyle>
+        <MapsSubtitleSettings Text="Population Range"></MapsSubtitleSettings>
+    </MapsTitleSettings><br />
+    <MapsLayers>
+        <MapsLayer ShapeData="@MapShapeData" ShapePropertyPath="@(new string[] { "departamento" })" ShapeDataPath="departamento" DataSource="datasource" TValue="SelectionData">
+            <MapsLayerTooltipSettings Visible="true" ValuePath="poblacion" Format="Departamento: ${departamento} <br> Poblacion: ${poblacion}">
+                <MapsLayerTooltipTextStyle FontFamily="Segoe UI"></MapsLayerTooltipTextStyle>
+            </MapsLayerTooltipSettings>
+            <MapsShapeSettings ColorValuePath='@("poblacion")'>
+                    <MapsShapeBorder Color="white" Width="0.5" />
                     <MapsShapeColorMappings>
-                        <MapsShapeColorMapping StartRange="60000" EndRange="400000" Color="@ColorMappingColorOne" Label="<0.4M" />
-                        <MapsShapeColorMapping StartRange="400000" EndRange="10000000" Color="@ColorMappingColorTwo" Label="0.4-10M" />
-                        <MapsShapeColorMapping StartRange="10000000" EndRange="20000000" Color="@ColorMappingColorThree" Label="10-20M" />
-                        <MapsShapeColorMapping StartRange="20000000" EndRange="70000000" Color="@ColorMappingColorFour" Label="20-70M" />
-                        <MapsShapeColorMapping StartRange="70000000" EndRange="100000000" Color="@ColorMappingColorFive" Label="70-100M" />
-                        <MapsShapeColorMapping StartRange="100000000" EndRange="200000000" Color="@ColorMappingColorSix" Label=">100M" />
+                        <MapsShapeColorMapping StartRange="10000" EndRange="30000" Color="@ColorMappingColorOne" Label="<30M" />
+                        <MapsShapeColorMapping StartRange="30000" EndRange="60000" Color="@ColorMappingColorTwo" Label="30-60M" />
+                        <MapsShapeColorMapping StartRange="60000" EndRange="120000" Color="@ColorMappingColorThree" Label="60-120M" />
+                        <MapsShapeColorMapping StartRange="120000" EndRange="500000" Color="@ColorMappingColorFour" Label=">150M" />
                     </MapsShapeColorMappings>
                 </MapsShapeSettings>
-            </MapsLayer>
-        </MapsLayers>
-    </SfMaps>
-    <div class="urllink">
+            <MapsDataLabelSettings Visible="true" LabelPath="departamento" SmartLabelMode="SmartLabelMode.Trim" IntersectionAction="IntersectAction.Trim">
+                <MapsLayerDataLabelTextStyle FontFamily="Segoe UI" Color="#f0f0f0" FontWeight="bold" Size="7"></MapsLayerDataLabelTextStyle>
+            </MapsDataLabelSettings>
+        </MapsLayer>
+    </MapsLayers>
+</SfMaps><br /><br />
+    <div class="right">
         Source:
-        <a href="https://en.wikipedia.org/wiki/List_of_states_and_union_territories_of_India_by_population" target="_blank">en.wikipedia.org</a>
+        <a href="https://es.wikipedia.org/wiki/Provincia_de_Mendoza" target="_blank">Mendoza Censo 2010 - Wikipedia</a>
     </div>
 </div>
+<br/>
+
+<style>
+    .ulstyle {
+        margin: 0px;
+        padding-left: 20px;
+        display: inline-block;
+    }
+    .list {
+    float: left;
+    line-height: 20px;
+    margin: 10px;
+    min-width: 250px;
+    }
+    .center {
+        align-content:center;
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+    }
+    .right {
+        align-content:right;
+        margin: auto;
+        padding: 10px;
+        justify-content: flex-end;
+    }
+</style>
 @code {
+
+    public string[] ColorMappingColorOne = { "#9fdfdf" };
+    public string[] ColorMappingColorTwo = { "#53C6C6" };
+    public string[] ColorMappingColorThree = { "#339999" };
+    public string[] ColorMappingColorFour = { "#2d8686" };
+
 
     public MapDataSettings MapShapeData = new MapDataSettings
         {
@@ -48,59 +84,42 @@
             dataOptions = "dep_mendoza.json",
             type = "GET"
         };
-
-    public Theme Theme { get; set; }
-    public string[] ShapePropertyPath = { "NAME_1" };
-    public string[] ColorMappingColorOne = { "#9fdfdf" };
-    public string[] ColorMappingColorTwo = { "#79d2d2" };
-    public string[] ColorMappingColorThree = { "#53C6C6" };
-    public string[] ColorMappingColorFour = { "#39acac" };
-    public string[] ColorMappingColorFive = { "#339999" };
-    public string[] ColorMappingColorSix = { "#2d8686" };
-    public class State
+    public class MapDataSettings
     {
-        public string Name { get; set; }
-        public double Population { get; set; }
+        public Boolean async { get; set; }
+        public String dataOptions { get; set; } = string.Empty;
+        public String type { get; set; } = string.Empty;
     };
-    public List<State> StateWisePopulation = new List<State> {
-        new State { Name="Uttar Pradesh", Population=199581477 },
-        new State { Name="Maharashtra", Population=112372972 },
-        new State { Name="Bihar", Population=103804637 },
-        new State { Name="West Bengal", Population=91347736 },
-        new State { Name="Andhra Pradesh", Population=84665533 },
-        new State { Name="Madhya Pradesh", Population=72597565 },
-        new State { Name="Tamil Nadu", Population=72138958 },
-        new State { Name="Rajasthan", Population=68621012 },
-        new State { Name="Karnataka", Population=61130704 },
-        new State { Name="Gujarat", Population=60383628 },
-        new State { Name="Orissa", Population=41947358 },
-        new State { Name="Kerala", Population=33387677 },
-        new State { Name="Jharkhand", Population=32966238 },
-        new State { Name="Assam", Population=31169272 },
-        new State { Name="Punjab", Population=27704236 },
-        new State { Name="Haryana", Population=25353081 },
-        new State { Name="Chhattisgarh", Population=25540196 },
-        new State { Name="Jammu and Kashmir", Population=12548926 },
-        new State { Name="Uttaranchal", Population=10116752 },
-        new State { Name="Himachal Pradesh", Population=6856509 },
-        new State { Name="Tripura", Population=3671032 },
-        new State { Name="Meghalaya", Population=2964007 },
-        new State { Name="Manipur", Population=2721756 },
-        new State { Name="Nagaland", Population=1980602 },
-        new State { Name="Goa", Population=1457723 },
-        new State { Name="Arunachal Pradesh", Population=1382611 },
-        new State { Name="Mizoram", Population=1091014 },
-        new State { Name="Sikkim", Population=607688 },
-        new State { Name="Delhi", Population=16753235 },
-        new State { Name="Puducherry", Population=1244464 },
-        new State { Name="Chandigarh", Population=1054686 },
-        new State { Name="Andaman and Nicobar", Population=379944 },
-        new State { Name="Dadra and Nagar Haveli", Population=342853 },
-        new State { Name="Daman and Diu", Population=242911 },
-        new State { Name="Lakshadweep", Population=64429 }
-    };
-    protected override void OnInitialized()
-    {
 
+    public class SelectionData
+    {
+        public int id { get; set; }
+        public string departamento { get; set; } = string.Empty;
+        public string cabecera { get; set; } = string.Empty;
+        public int poblacion { get; set; }
+        public int superficie { get; set; }
+        public double densidad { get; set; }
     }
+
+    public List<SelectionData> datasource = new List<SelectionData> {
+        new SelectionData { id=1, departamento="GUAYMALLEN", cabecera="VILLA NUEVA",poblacion=283803, superficie=164, densidad=1730.5 },
+        new SelectionData { id=2, departamento="LAS HERAS", cabecera="LAS HERAS",poblacion=203666, superficie=8955, densidad=22.74 },
+        new SelectionData { id=3, departamento="GODOY CRUZ", cabecera="GODOY CRUZ",poblacion=191903, superficie=75, densidad=2588.7 },
+        new SelectionData { id=4, departamento="SAN RAFAEL", cabecera="SAN RAFAEL",poblacion=188018, superficie=31235, densidad=6.01 },
+        new SelectionData { id=5, departamento="MAIPU", cabecera="MAIPU",poblacion=172332, superficie=617, densidad=279.3 },
+        new SelectionData { id=6, departamento="LUJAN DE CUYO", cabecera="LUJAN DE CUYO",poblacion=119888, superficie=4847, densidad=24.73 },
+        new SelectionData { id=7, departamento="SAN MARTIN", cabecera="SAN MARTIN",poblacion=118220, superficie=1504, densidad=78.6 },
+        new SelectionData { id=8, departamento="CAPITAL", cabecera="MENDOZA",poblacion=115041, superficie=54, densidad=2130.4 },
+        new SelectionData { id=9, departamento="RIVADAVIA", cabecera="RIVADAVIA",poblacion=56373, superficie=2141, densidad=26.33 },
+        new SelectionData { id=10, departamento="TUNUYAN", cabecera="TUNUYAN",poblacion=49458, superficie=3317, densidad=14.91 },
+        new SelectionData { id=11, departamento="GENERAL ALVEAR", cabecera="GENERAL ALVEAR",poblacion=46429, superficie=14448, densidad=3.21 },
+        new SelectionData { id=12, departamento="JUNIN", cabecera="JUNIN",poblacion=37859, superficie=263, densidad=143.95 },
+        new SelectionData { id=13, departamento="LAVALLE", cabecera="VILLA TULUMAYA",poblacion=36738, superficie=10212, densidad=3.6 },
+        new SelectionData { id=14, departamento="SAN CARLOS", cabecera="VILLA SAN CARLOS",poblacion=32631, superficie=11578, densidad=2.81 },
+        new SelectionData { id=15, departamento="TUPUNGATO", cabecera="TUPUNGATO",poblacion=32524, superficie=2485, densidad=13.08 },
+        new SelectionData { id=16, departamento="MALARGUE", cabecera="MALARGUE",poblacion=27660, superficie=41317, densidad=0.66 },
+        new SelectionData { id=17, departamento="SANTA ROSA", cabecera="SANTA ROSA",poblacion=16374, superficie=8510, densidad=1.92 },
+        new SelectionData { id=18, departamento="LA PAZ", cabecera="LA PAZ",poblacion=10012, superficie=7105, densidad=1.41 }
+    };
+
 }

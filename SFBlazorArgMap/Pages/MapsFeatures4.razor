@@ -1,0 +1,190 @@
+﻿@page "/maps-features4"
+
+@using Syncfusion.Blazor.Maps
+
+<div class="control-section">
+    <SfMaps Height="900px" Width="1200px" Theme="Theme.Bootstrap5" Background="transparent" UseGroupingSeparator="true">
+        <MapsAreaSettings Background="transparent" />
+        <MapsCenterPosition Latitude="-34.192" Longitude="-68.2623" />
+        <MapsZoomSettings Enable="false" ZoomFactor="8" />
+        <MapsLayers>
+            <MapsLayer UrlTemplate="https://a.tile.openstreetmap.org/level/tileX/tileY.png" TValue="string">
+                <MapsNavigationLines>
+                    <MapsNavigationLine Visible="true" Width="45" Angle="-0.05" Color="#00ace6"
+                                        Latitude="@navigationLineOne" Longitude="@navigationLineTwo" />
+                    <MapsNavigationLine Visible="true" Width="45" Angle="-0.05" Color="#00ace6"
+                                        Latitude="@navigationLineThree" Longitude="@navigationLineFour" />
+                    <MapsNavigationLine Visible="true" Width="45" Angle="-0.05" Color="#00ace6"
+                                        Latitude="@navigationLineFive" Longitude="@navigationLineSix" />
+                </MapsNavigationLines>
+                <MapsMarkerSettings>
+                    <MapsMarker Visible="true" Shape="MarkerType.Circle" Fill="#FFFFFF" Height="15" Width="15" DataSource="@AirportMza" TValue="MarkerLocation" AnimationDuration="0">
+                        <MapsMarkerBorder Width="1" Color="#000000" />
+                        <MapsMarkerTooltipSettings Visible="true" ValuePath="Name">
+                            <MapsMarkerTooltipTextStyle FontFamily="Segoe UI"></MapsMarkerTooltipTextStyle>
+                        </MapsMarkerTooltipSettings>
+                    </MapsMarker>
+                    <MapsMarker Visible="true" Shape="MarkerType.Circle" Fill="#FFFFFF" Height="15" Width="15" DataSource="@AirportSL" TValue="MarkerLocation" AnimationDuration="0">
+                        <MapsMarkerBorder Width="1" Color="#000000" />
+                        <MapsMarkerTooltipSettings Visible="true" ValuePath="Name">
+                            <MapsMarkerTooltipTextStyle FontFamily="Segoe UI"></MapsMarkerTooltipTextStyle>
+                        </MapsMarkerTooltipSettings>
+                    </MapsMarker>
+                    <MapsMarker Visible="true" Shape="MarkerType.Circle" Fill="#FFFFFF" Height="15" Width="15" DataSource="@AirportSantiago" TValue="MarkerLocation" AnimationDuration="0">
+                        <MapsMarkerBorder Width="1" Color="#000000" />
+                        <MapsMarkerTooltipSettings Visible="true" ValuePath="Name">
+                            <MapsMarkerTooltipTextStyle FontFamily="Segoe UI"></MapsMarkerTooltipTextStyle>
+                        </MapsMarkerTooltipSettings>
+                    </MapsMarker>
+                    <MapsMarker Visible="true" DataSource="@DistanceMzaSR" TValue="MarkerLocation">
+                        <MarkerTemplate>
+                            @{
+                                <div>
+                                    <img class="markerTemplate" src="/images/image1.svg" style="margin-left:-56px" />
+                                </div>
+                            }
+                        </MarkerTemplate>
+                    </MapsMarker>
+                    <MapsMarker Visible="true" DataSource="@DistanceSLSR" TValue="MarkerLocation">
+                        <MarkerTemplate>
+                            @{
+                                <div>
+                                    <img class="markerTemplate" src="/images/image3.svg" style="margin-left:-56px" />
+                                </div>
+                            }
+                        </MarkerTemplate>
+                    </MapsMarker>
+                    <MapsMarker Visible="true" DataSource="@DistanceSantiagoSR" TValue="MarkerLocation">
+                        <MarkerTemplate>
+                            @{
+                                <div>
+                                    <img class="markerTemplate" src="/images/image2.svg" style="margin-left:-56px" />
+                                </div>
+                            }
+                        </MarkerTemplate>
+                    </MapsMarker>
+                    <MapsMarker Visible="true" DataSource="@MzaLocation" TValue="MarkerLocation">
+                        <MarkerTemplate>
+                            @{
+                                <div>
+                                    <div style="text-align: right; font-weight:500; font-size: 13px;color: black;">
+                                        <b>Aeropuerto<br />El Plumerillo</b>
+                                    </div>
+                                </div>
+                            }
+                        </MarkerTemplate>
+                    </MapsMarker>
+                    <MapsMarker Visible="true" DataSource="@SanLuisLocation" TValue="MarkerLocation">
+                        <MarkerTemplate>
+                            @{
+                                    <div>
+                                        <div style="text-align: right; font-weight:500; font-size: 13px;color: black;">
+                                            <b>San Luis</b>
+                                        </div>
+                                    </div>
+                            }
+                        </MarkerTemplate>
+                    </MapsMarker>
+                    <MapsMarker Visible="true" DataSource="@SantiagoLocation" TValue="MarkerLocation">
+                        <MarkerTemplate>
+                            @{
+                                <div>
+                                    <div style="text-align: right; font-weight:500; font-size: 13px;color: black;">
+                                        <b>Santiago de Chile</b>
+                                    </div>
+                                </div>
+                            }
+                        </MarkerTemplate>
+                    </MapsMarker>
+                    <MapsMarker Visible="true" DataSource="@SRLocation" TValue="MarkerLocation">
+                        <MarkerTemplate>
+                            @{
+                                <div>
+                                    <div style="text-align: right; font-weight:500; font-size: 13px;color: black;margin-top:17px;margin-left:-10px"><b>San Rafael</b></div>
+                                </div>
+                            }
+                        </MarkerTemplate>
+                    </MapsMarker>
+                    <MapsMarker Visible="true" DataSource="@SRLocationShape" TValue="MarkerLocation">
+                        <MarkerTemplate>
+                            @{
+                                <div style="pointer-events:none">
+                                    <img src="/images/group.svg" style="height:30px;width:20px;margin-top: 39%;" />
+                                </div>
+                            }
+                        </MarkerTemplate>
+                    </MapsMarker>
+                    <MapsMarker Visible="true" DataSource="@SRLocations" TValue="MarkerLocation">
+                        <ChildContent>
+                            <MapsMarkerTooltipSettings Visible="true" ValuePath="Name">
+                                <MapsMarkerTooltipTextStyle FontFamily="Segoe UI"></MapsMarkerTooltipTextStyle>
+                            </MapsMarkerTooltipSettings>
+                        </ChildContent>
+                        <MarkerTemplate>
+                            @{
+                                <div style="margin-top:6px;pointer-events:none">
+                                    <img src="/images/ballon.png" style="height:30px;width:20px;" />
+                                </div>
+                            }
+                        </MarkerTemplate>
+                    </MapsMarker>
+                </MapsMarkerSettings>
+            </MapsLayer>
+        </MapsLayers>
+    </SfMaps>
+    <div class="urllink">
+        <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>
+    </div>
+</div>
+@code {
+    public class MarkerLocation
+    {
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public string Name { get; set; }
+    };
+    public double[] navigationLineOne = new double[] { -34.71772, -32.89084 };
+    public double[] navigationLineTwo = new double[] { -68.33007, -68.82717 };
+    public double[] navigationLineThree = new double[] { -34.71772, -33.29501 };
+    public double[] navigationLineFour = new double[] { -68.33007, -66.33563 };
+    public double[] navigationLineFive = new double[] { -34.71772, -33.45694 };
+    public double[] navigationLineSix = new double[] { -68.33007, -70.64827 };
+
+    public List<MarkerLocation> AirportMza = new List<MarkerLocation> {
+        new MarkerLocation { Latitude=-32.89084, Longitude=-68.82717, Name="Aeropuerto el Plumerillo - Mendoza" }
+    };
+    public List<MarkerLocation> AirportSL = new List<MarkerLocation> {
+        new MarkerLocation { Latitude=-33.29501, Longitude=-66.33563, Name="Aeropuerto de San Luis" }
+    };
+    public List<MarkerLocation> AirportSantiago = new List<MarkerLocation> {
+        new MarkerLocation { Latitude=-33.45694, Longitude=-70.64827, Name="Aeropuerto de Santiago de Chile" }
+    };
+    public List<MarkerLocation> SRLocationShape = new List<MarkerLocation> {
+        new MarkerLocation { Latitude=-34.71772, Longitude=-68.33007, Name="San Rafael" },
+    };
+    public List<MarkerLocation> DistanceMzaSR = new List<MarkerLocation> {
+        new MarkerLocation { Latitude=-33.69084, Longitude=-68.7, Name="tooltip" },
+    };
+    public List<MarkerLocation> DistanceSLSR = new List<MarkerLocation> {
+        new MarkerLocation { Latitude=-33.69084, Longitude=-66.8, Name="tooltip" },
+    };
+    public List<MarkerLocation> DistanceSantiagoSR = new List<MarkerLocation> {
+        new MarkerLocation { Latitude=-33.69084, Longitude=-70.3, Name="tooltip" },
+    };
+    public List<MarkerLocation> MzaLocation = new List<MarkerLocation> {
+        new MarkerLocation { Latitude=-32.69084, Longitude=-68.82717, Name="Mendoza Capital" },
+    };
+    public List<MarkerLocation> SanLuisLocation = new List<MarkerLocation> {
+        new MarkerLocation { Latitude=-33.29501, Longitude=-66.18563, Name="San Luis Capital" },
+    };
+    public List<MarkerLocation> SantiagoLocation = new List<MarkerLocation> {
+        new MarkerLocation { Latitude=-33.45694, Longitude=-70.43827, Name="Santiago de Chile Capital" },
+    };
+    public List<MarkerLocation> SRLocation = new List<MarkerLocation> {
+       new MarkerLocation { Latitude=-34.71772, Longitude=-68.13007, Name="San Rafael" },
+    };
+    public List<MarkerLocation> SRLocations = new List<MarkerLocation> {
+        new MarkerLocation { Latitude=-34.68, Longitude=-68.33007, Name="San Rafael" },
+    };
+
+}
